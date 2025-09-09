@@ -45,22 +45,20 @@ def send_image(recipient_id: str, image_url: str):
 
 def ask_story_consent(recipient_id: str, story_url):
     headers = {"Authorization": f"Bearer {INSTA_ACCESS_TOKEN}"}
-
-            # "text": "გინდათ ეს ფოტო დავსთოროთ?",
     payload = {
         "recipient": {"id": recipient_id},
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Do you want us to upload this story and mention you?",
+            "text": "გინდათ ეს ფოტო დავსთოროთ?",
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "Yes",
+                    "title": "კი",
                     "payload": f"yes {recipient_id} {story_url}",
                 },
                 {
                     "content_type": "text",
-                    "title": "No",
+                    "title": "არა",
                     "payload": f"no {recipient_id} {story_url}",
                 },
             ],
