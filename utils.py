@@ -53,12 +53,12 @@ def ask_story_consent(recipient_id: str, story_url):
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "კი",
+                    "title": "Yes",
                     "payload": f"yes {recipient_id} {story_url}",
                 },
                 {
                     "content_type": "text",
-                    "title": "არა",
+                    "title": "No",
                     "payload": f"no {recipient_id} {story_url}",
                 },
             ],

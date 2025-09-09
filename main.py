@@ -62,14 +62,16 @@ async def instagram_webhook(request: Request):
             image_urls = list_images_from_manifest(code)
 
             if not image_urls:
-                send_text(sender_id, "გალერეის კოდი არასწორია, თავიდან სცადეთ")
+                # send_text(sender_id, "გალერეის კოდი არასწორია, თავიდან სცადეთ")
+                send_text(sender_id, "Gallery Code is incorrect, try again")
 
                 raise Exception("Wrong gallery code")
 
             link = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/index.html"
 
             send_text(sender_id, link)
-            send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
+            # send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
+            send_text(sender_id, "Please wait, your story is being generated...")
             time.sleep(0.3)
 
             story_img = make_story_from_urls(image_urls[1:])
