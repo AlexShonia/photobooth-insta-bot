@@ -55,18 +55,26 @@ async def instagram_webhook(request: Request):
         text = body["entry"][0]["messaging"][0]["message"]["text"]
         quick_reply = body["entry"][0]["messaging"][0]["message"].get("quick_reply")
 
-        if not quick_reply and len(text) == 6:
+        if not quick_reply and text[0] == "#" and len(text) == 7:
             # c5T8Mh
-            link = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{text}/index.html"
+            code = text[1:]
+
+            image_urls = list_images_from_manifest(code)
+
+            if not image_urls:
+                send_text(sender_id, "გალერეის კოდი არასწორია, თავიდან სცადეთ")
+
+                raise Exception("Wrong gallery code")
+
+            link = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/index.html"
 
             send_text(sender_id, link)
+            send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
             time.sleep(0.3)
-
-            image_urls = list_images_from_manifest(text)
 
             story_img = make_story_from_urls(image_urls[1:])
 
-            story_url = upload_story_to_s3(story_img, text)
+            story_url = upload_story_to_s3(story_img, code)
 
             send_image(
                 sender_id,

@@ -70,11 +70,14 @@ def ask_story_consent(recipient_id: str, story_url):
 
 
 def list_images_from_manifest(code: str) -> list[str]:
-    url = (
-        f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/manifest.json"
-    )
-    r = requests.get(url, timeout=10)
-    r.raise_for_status()
+    try:
+        url = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/manifest.json"
+        r = requests.get(url, timeout=10)
+        r.raise_for_status()
+
+    except Exception:
+        return False
+
     data = r.json()
     return [
         f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/{name}"
