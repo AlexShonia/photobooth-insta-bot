@@ -69,21 +69,21 @@ async def instagram_webhook(request: Request):
             link = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/index.html"
 
             send_text(sender_id, link)
-            send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
-            time.sleep(0.3)
+            # send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
+            # time.sleep(0.3)
 
-            story_img = make_story_from_urls(image_urls[1:])
+            # story_img = make_story_from_urls(image_urls[1:])
 
-            story_url = upload_story_to_s3(story_img, code)
+            # story_url = upload_story_to_s3(story_img, code)
 
-            send_image(
-                sender_id,
-                story_url,
-            )
+            # send_image(
+            #     sender_id,
+            #     story_url,
+            # )
 
-            time.sleep(0.3)
+            # time.sleep(0.3)
 
-            ask_story_consent(sender_id, story_url)
+            # ask_story_consent(sender_id, story_url)
 
         elif quick_reply:
             payload = quick_reply["payload"]
