@@ -55,7 +55,7 @@ async def instagram_webhook(request: Request):
         text = body["entry"][0]["messaging"][0]["message"]["text"]
         quick_reply = body["entry"][0]["messaging"][0]["message"].get("quick_reply")
 
-        if not quick_reply and text[0] == "#" and len(text) == 5:
+        if not quick_reply and text[0] == "#" and (len(text) == 5 or len(text) == 7):
             # c5T8Mh
             code = text[1:]
 
