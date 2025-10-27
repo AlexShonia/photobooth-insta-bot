@@ -69,7 +69,7 @@ async def instagram_webhook(request: Request):
             link = f"https://funwell-gallery-bucket.s3.amazonaws.com/gallery/{code}/index.html"
 
             send_text(sender_id, link)
-            send_text(sender_id, "ფოტოების გადასაწერად გადადით ლინკზე ⬆️")
+            send_text(sender_id, "ფოტოების გადმოსაწერად გადადით ლინკზე ⬆️")
 
             # send_text(sender_id, "დაელოდეთ, თქვენი სთორი გენერირდება...")
             # time.sleep(0.3)
